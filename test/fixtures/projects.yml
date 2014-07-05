@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client_id: 1
+  sales_id: 1
+  designer_id: 1
+  markup_id: 1
+  developer_id: 1
+  marketplace_id: 1
+  category_id: 1
+  department_id: 1
+  title: MyString
+  description: MyText
+  special_notes: MyText
+  price: 1.5
+  bonus: 1.5
+  fine: 1.5
+  marketplace_fee: 1.5
+  awarded_on: 2014-07-05 05:29:29
+  started_on: 2014-07-05 05:29:29
+  ended_on: 2014-07-05 05:29:29
+  duration: MyString
+  url: MyString
+  remark: MyString
+  status_id: 1
+
+two:
+  client_id: 1
+  sales_id: 1
+  designer_id: 1
+  markup_id: 1
+  developer_id: 1
+  marketplace_id: 1
+  category_id: 1
+  department_id: 1
+  title: MyString
+  description: MyText
+  special_notes: MyText
+  price: 1.5
+  bonus: 1.5
+  fine: 1.5
+  marketplace_fee: 1.5
+  awarded_on: 2014-07-05 05:29:29
+  started_on: 2014-07-05 05:29:29
+  ended_on: 2014-07-05 05:29:29
+  duration: MyString
+  url: MyString
+  remark: MyString
+  status_id: 1
