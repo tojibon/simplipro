@@ -27,7 +27,16 @@ ActiveAdmin.register Project do
   end
   
   # Create sections on the index screen
-  scope :all, :default => false
+  scope :all
+  Status.all.each do |status|
+    scope "#{status.title}" do
+      Project.where('status_id = ?', status.id)
+    end
+  end
+  
+  #scope :client do
+  #  AdminUser.where('is_client = true')
+  #end
   
   # Customize columns displayed on the index screen in the table
   index do
@@ -40,7 +49,11 @@ ActiveAdmin.register Project do
         number_to_currency project.price
       end
     end
-    column :status
+    column :status do |project|
+      div :class => "sidebar-project-status", :style => "color: #{project.status.color}; background-color: #{project.status.background_color};" do
+        project.status.title
+      end
+    end
     column :started_on
     column :ended_on
     actions
