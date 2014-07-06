@@ -11,7 +11,7 @@ ActiveAdmin.register AdminUser do
   
   sidebar "Projects related to this user!", :only => :show do
     if admin_user.is_client
-      table_for(Project.where("client_id = ? || sales_id = ? || designer_id = ? || markup_id = ? || developer_id = ?", admin_user.id, admin_user.id, admin_user.id, admin_user.id, admin_user.id).limit(5)) do
+      table_for(Project.where("client_id = ? or sales_id = ? or designer_id = ? or markup_id = ? or developer_id = ?", admin_user.id, admin_user.id, admin_user.id, admin_user.id, admin_user.id).limit(5)) do
         column "Title", :title do |project|
           div :class => "sidebar-project-title" do
             link_to project.title, admin_project_path(project)  
