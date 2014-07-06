@@ -19,12 +19,21 @@ ActiveAdmin.register Project do
   end  
   
   
+  sidebar "More from this Client!  ", only: [:show] do
+    ul do
+      li link_to("Tickets", "admin_project_tickets_path(project)")
+      li link_to("Milestones", "admin_project_milestones_path(project)")
+    end
+  end
+  
   # Create sections on the index screen
   scope :all, :default => false
   
   # Customize columns displayed on the index screen in the table
   index do
-    column :title
+    column :title do |project|
+      link_to project.title, admin_project_path(project)
+    end
     column :category
     column "Price", :sortable => :price do |project|
       div :class => "price" do
@@ -35,6 +44,21 @@ ActiveAdmin.register Project do
     column :started_on
     column :ended_on
     actions
+  end
+  
+  sidebar "Other Projects from this client!", :only => :show do
+    table_for(Project.where("client_id = ? and id != ?", project.client_id, project).limit(5)) do
+      column "Title", :title do |project|
+        div :class => "sidebar-project-title" do
+          link_to project.title, admin_project_path(project)  
+        end
+      end
+      column "Status", :status do |project|
+        div :class => "sidebar-project-status", :style => "color: #{project.status.color}; background-color: #{project.status.background_color};" do
+          project.status.title
+        end
+      end
+    end
   end
   
 end

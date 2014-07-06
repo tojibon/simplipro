@@ -18,3 +18,15 @@
 .price {
   text-align: right;
 }
+
+.sidebar-project-title {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 132px;
+}
+
+.sidebar-project-status {
+  padding-left: 4px; border-radius: 2px; font-weight: bold;
+}

@@ -18,4 +18,8 @@ ActiveAdmin.register Marketplace do
     permitted = [:title]
   end
   
+  filter :title
+  filter :created_at
+  filter :updated_at
+  
 end

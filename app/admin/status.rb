@@ -15,7 +15,13 @@ ActiveAdmin.register Status do
   # end
   
   permit_params do
-    permitted = [:title, :color]
+    permitted = [:title, :color, :background_color]
   end
+  
+  filter :title
+  filter :color
+  filter :background_color
+  filter :created_at
+  filter :updated_at
   
 end
