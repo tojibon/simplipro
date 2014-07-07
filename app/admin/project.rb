@@ -1,5 +1,6 @@
 ActiveAdmin.register Project do
 
+  config.per_page = 50 
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -34,16 +35,38 @@ ActiveAdmin.register Project do
     end
   end
   
+  
+  lastMonthsStart = 2.months.ago
+  lastMonthsEnd = 1.months.ago
+  scope "Last Months" do
+    Project.where(:created_at => lastMonthsStart..lastMonthsEnd)
+  end 
+  
+  thisMonthsStart = 1.months.ago
+  thisMonthsEnd = 0.months.ago
+  scope "This Months" do
+    Project.where(:created_at => thisMonthsStart..thisMonthsEnd)
+  end 
+  
+  
+  
   #scope :client do
   #  AdminUser.where('is_client = true')
   #end
   
   # Customize columns displayed on the index screen in the table
   index do
+    column :id
     column :title do |project|
-      link_to project.title, admin_project_path(project)
+      div :class => "grid-row-item-title" do  
+        link_to project.title, admin_project_path(project)
+      end  
     end
-    column :category
+    column :category do |project|
+      div :class => "grid-row-item-title" do  
+        link_to project.category.title, admin_category_path(project.category)
+      end  
+    end
     column "Price", :sortable => :price do |project|
       div :class => "price" do
         number_to_currency project.price
@@ -56,7 +79,13 @@ ActiveAdmin.register Project do
     end
     column :started_on
     column :ended_on
+    
     actions
+    
+    #column "Action" do |project| 
+    #  link_to "Edit", edit_admin_project(project) 
+    #end
+     
   end
   
   sidebar "Other Projects from this client!", :only => :show do

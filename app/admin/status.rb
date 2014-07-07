@@ -24,4 +24,16 @@ ActiveAdmin.register Status do
   filter :created_at
   filter :updated_at
   
+  index do
+    column :id 
+    column :title do |status|
+      div :class=>"sidebar-project-status", :style=>"color: #{status.color}; background-color: #{status.background_color};" do
+        status.title
+      end
+    end
+    column :created_at
+    column :updated_at
+    actions
+  end
+  
 end

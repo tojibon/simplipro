@@ -19,6 +19,14 @@
   text-align: right;
 }
 
+.grid-row-item-title {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
 .sidebar-project-title {
   display: block;
   white-space: nowrap;
@@ -28,5 +36,5 @@
 }
 
 .sidebar-project-status {
-  padding-left: 4px; border-radius: 2px; font-weight: normal; text-transform: uppercase; font-size: 90%;
+  padding: 0 4px; border-radius: 2px; font-weight: normal; text-transform: uppercase; font-size: 90%; display: inherit;
 }

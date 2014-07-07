@@ -7,7 +7,8 @@ ActiveAdmin.register_page "Dashboard" do
     columns do      
       Status.all.each do |status|
         column do    
-          panel "#{status.title} Projects" do
+          @total_records = Project.where("status_id = ?", status).count
+          panel "#{status.title} Projects (#{@total_records})" do
             table_for Project.where("status_id = ?", status).limit(5) do
               column :title do |project|
                 div :class => "sidebar-project-title" do
@@ -25,6 +26,7 @@ ActiveAdmin.register_page "Dashboard" do
                 end
               end
             end
+            strong link_to "View all #{status.title} Projects", admin_projects_path() + "?scope=#{status.title.downcase}";
           end
         end      
       end
