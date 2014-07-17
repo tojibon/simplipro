@@ -1,0 +1,14 @@
+jQuery(document).ready(function(){
+	
+    jQuery('#payment_project_id').on('change', function(){
+    	$('#project-payment-partial-contents').html('Updating...');
+    	$('#project-payment-partial-contents').load('/payments/refresh_payments');
+    });
+    
+    
+    
+    jQuery('#payment_client_id').on('change', function(){
+    	alert($(this).val());
+    });
+    
+});

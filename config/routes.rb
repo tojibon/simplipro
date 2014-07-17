@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   
   root to: "admin/dashboard#index"
+  get 'payments/refresh_payments' => 'payments#refresh_payments'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

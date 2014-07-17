@@ -18,15 +18,13 @@ ActiveAdmin.register Payment do
     permitted = [:project_id, :client_id, :paid_on, :amount]
   end
   
-  sidebar "This Projects#101 Payment Stats!", :only => [:new, :show, :edit] do
-    "Needs to show currently selected projects payment stats so far"
-  end
+  sidebar "Project Payments!",  :only => [:new, :edit, :show], :partial => "project_payment_partial"
   
-  sidebar "This Clients#101 Payment Stats!", :only => [:new, :show, :edit] do
+  sidebar "Client Payments!", :only => [:new, :show, :edit] do
     "Needs to show currently selected clients payment stats so far"
   end
   
-  sidebar :help, :partial => "new_payment_help_partial"
+  sidebar :help,  :only => [:new, :edit, :show], :partial => "new_payment_help_partial"
   
   
   form do |f|
