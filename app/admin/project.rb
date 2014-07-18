@@ -20,13 +20,6 @@ ActiveAdmin.register Project do
   end  
   
   
-  sidebar "More from this Client!  ", only: [:show] do
-    ul do
-      li link_to("Tickets", "admin_project_tickets_path(project)")
-      li link_to("Milestones", "admin_project_milestones_path(project)")
-    end
-  end
-  
   # Create sections on the index screen
   scope :all
   Status.all.each do |status|
@@ -86,6 +79,10 @@ ActiveAdmin.register Project do
     #  link_to "Edit", edit_admin_project(project) 
     #end
      
+  end
+  
+  sidebar "Payment Summary!  ", only: [:show] do    
+    render partial: "project_payments", locals: {project: project}
   end
   
   sidebar "Other Projects from this client!", :only => :show do

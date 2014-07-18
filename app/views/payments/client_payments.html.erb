@@ -1,0 +1,14 @@
+<table>
+  <tr>
+  	<th>Total Price</th>
+    <th class="price"><%= number_to_currency @Total_Price %></th>
+  </tr>   	
+  <tr>
+    <th>Total Paid</th>
+    <th class="price"><%= number_to_currency  @Total_Paid %></th>
+  </tr>
+  <tr>
+    <th>Total Due</th>
+    <th class="price"><%= number_to_currency  @Total_Due %></th>
+  </tr>
+</table>

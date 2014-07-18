@@ -1,0 +1,31 @@
+<%
+@Total_Price = ( (@Project.price.to_f + @Project.bonus.to_f ) - ( @Project.fine.to_f + @Project.marketplace_fee.to_f ) )
+%>
+<table>
+  <tr>
+  	<th>Project Price</th>
+    <th class="price"><%= number_to_currency @Total_Price %></th>
+  </tr>   
+ 
+	<% 
+	@Total_Due = 0;
+	@Total_Paid = 0;
+	
+	if @Project.payment.any? 
+		@Project.payment.each do |payment|
+			@Total_Paid+=payment.amount
+		end
+		@Total_Due = @Total_Price - @Total_Paid
+	end
+	%>
+	
+  <tr>
+    <th>Total Paid</th>
+    <th class="price"><%= number_to_currency  @Total_Paid %></th>
+  </tr>
+  <tr>
+    <th>Total Due</th>
+    <th class="price"><%= number_to_currency  @Total_Due %></th>
+  </tr>
+
+</table>

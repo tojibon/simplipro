@@ -2,13 +2,22 @@ jQuery(document).ready(function(){
 	
     jQuery('#payment_project_id').on('change', function(){
     	$('#project-payment-partial-contents').html('Updating...');
-    	$('#project-payment-partial-contents').load('/payments/refresh_payments');
+    	if ( $(this).val() == "" ) {
+    		$('#project-payment-partial-contents').html('<p>Please select a project on the form to get that selected projects payment status here.</p>')
+    	} else {
+    		$('#project-payment-partial-contents').load('/payments/project_payments/'+$(this).val());
+    	}
     });
     
     
     
     jQuery('#payment_client_id').on('change', function(){
-    	alert($(this).val());
+    	$('#client-payment-partial-contents').html('Updating...');
+    	if ( $(this).val() == "" ) {
+    		$('#client-payment-partial-contents').html('<p>Please select a client on the form to get that selected client projects payment status here.</p>	')
+    	} else {
+    		$('#client-payment-partial-contents').load('/payments/client_payments/'+$(this).val());
+    	}
     });
     
 });

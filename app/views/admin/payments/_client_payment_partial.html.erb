@@ -1,0 +1,35 @@
+<div id="client-payment-partial-contents">
+	<% if edit_mode == 'yes' %>
+		<%
+		@Total_Price = @Total_Paid = @Total_Due = 0
+    
+	    Project.where("client_id = ?", payment.client_id).each do |project|
+	      @Total_Price+=project.price
+	    end
+	
+	    Payment.where("client_id = ?", payment.client_id).each do |payment|
+	      @Total_Paid+=payment.amount
+	    end
+	
+	    @Total_Due = @Total_Price - @Total_Paid
+		%>
+		
+		<table>
+		  <tr>
+		  	<th>Total Price</th>
+		    <th class="price"><%= number_to_currency @Total_Price %></th>
+		  </tr>   	
+		  <tr>
+		    <th>Total Paid</th>
+		    <th class="price"><%= number_to_currency  @Total_Paid %></th>
+		  </tr>
+		  <tr>
+		    <th>Total Due</th>
+		    <th class="price"><%= number_to_currency  @Total_Due %></th>
+		  </tr>
+		</table>
+
+	<% else %>
+		<p>Please select a client on the form to get that selected client projects payment status here.</p>
+	<% end %>
+</div>	
