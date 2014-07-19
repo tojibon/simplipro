@@ -1,0 +1,11 @@
+<%= semantic_form_for Payment.new, :class => 'sidebar-form', :remote => true, :url => admin_payments_path do |f| %>
+    
+    <ul>
+    <%= f.input :project_id, :as => 'hidden', :value => project.id %>
+	<%= f.input :client_id, :as => 'hidden', :value => project.client_id %>
+	<%= f.input :amount %>
+	<%= f.input :paid_on %>
+	</ul>
+    <%= f.submit :value => 'Save Payment' %>
+  	
+<% end %>

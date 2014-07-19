@@ -4,11 +4,11 @@
 		@Total_Price = @Total_Paid = @Total_Due = 0
     
 	    Project.where("client_id = ?", payment.client_id).each do |project|
-	      @Total_Price+=project.price
+	      @Total_Price+=project.price.to_f
 	    end
 	
 	    Payment.where("client_id = ?", payment.client_id).each do |payment|
-	      @Total_Paid+=payment.amount
+	      @Total_Paid+=payment.amount.to_f
 	    end
 	
 	    @Total_Due = @Total_Price - @Total_Paid

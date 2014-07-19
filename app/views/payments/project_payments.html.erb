@@ -13,7 +13,7 @@
 	
 	if @Project.payment.any? 
 		@Project.payment.each do |payment|
-			@Total_Paid+=payment.amount
+			@Total_Paid+=payment.amount.to_f
 		end
 		@Total_Due = @Total_Price - @Total_Paid
 	end

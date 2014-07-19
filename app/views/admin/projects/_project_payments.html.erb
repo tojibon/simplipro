@@ -1,31 +1,33 @@
 <%
 @Total_Price = ( (project.price.to_f + project.bonus.to_f ) - ( project.fine.to_f + project.marketplace_fee.to_f ) )
 %>
-<table>
-  <tr>
-  	<th>Project Price</th>
-    <th class="price"><%= number_to_currency @Total_Price %></th>
-  </tr>   
- 
-	<% 
-	@Total_Due = 0;
-	@Total_Paid = 0;
-	
-	if project.payment.any? 
-		project.payment.each do |payment|
-			@Total_Paid+=payment.amount
+<div id="project-payment-partial-contents">
+	<table>
+	  <tr>
+	  	<th>Project Price</th>
+	    <th class="price"><%= number_to_currency @Total_Price %></th>
+	  </tr>   
+	 
+		<% 
+		@Total_Due = 0;
+		@Total_Paid = 0;
+		
+		if project.payment.any? 
+			project.payment.each do |payment|
+				@Total_Paid+=payment.amount.to_f
+			end
+			@Total_Due = @Total_Price - @Total_Paid
 		end
-		@Total_Due = @Total_Price - @Total_Paid
-	end
-	%>
+		%>
+		
+	  <tr>
+	    <th>Total Paid</th>
+	    <th class="price"><%= number_to_currency  @Total_Paid %></th>
+	  </tr>
+	  <tr>
+	    <th>Total Due</th>
+	    <th class="price"><%= number_to_currency  @Total_Due %></th>
+	  </tr>
 	
-  <tr>
-    <th>Total Paid</th>
-    <th class="price"><%= number_to_currency  @Total_Paid %></th>
-  </tr>
-  <tr>
-    <th>Total Due</th>
-    <th class="price"><%= number_to_currency  @Total_Due %></th>
-  </tr>
-
-</table>
+	</table>
+</div>

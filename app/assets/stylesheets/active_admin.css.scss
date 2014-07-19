@@ -15,6 +15,11 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+form input[type=submit] {
+  outline: 0;
+}
+
 .price {
   text-align: right;
 }
@@ -37,4 +42,22 @@
 
 .sidebar-project-status {
   padding: 0 4px; border-radius: 2px; font-weight: normal; text-transform: uppercase; font-size: 90%; display: inherit;
+}
+
+.sidebar_section form.payment #payment_amount_input {
+  margin-bottom: 20px;
+}
+
+.sidebar_section form.payment fieldset {
+  margin-bottom: 0px;
+}
+
+.sidebar_section form.payment ol.fragments-group li {
+  max-width: 40px;
+  float: left;
+  padding: 2px;
+}
+
+.sidebar_section form.payment ol.fragments-group select {
+  max-width: 100%;
 }

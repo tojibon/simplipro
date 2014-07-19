@@ -35,8 +35,34 @@ ActiveAdmin.register Payment do
     render partial: "client_payment_partial", locals: {edit_mode: 'no'}
   end
   
-  sidebar :help,  :only => [:new, :edit, :show], :partial => "new_payment_help_partial"
+  sidebar :help,  :only => [:new, :edit], :partial => "new_payment_help_partial"
   
+  sidebar :overview,  :only => [:show] do
+    render partial: "project_payment_partial", locals: {payment: payment, edit_mode: 'yes'}
+  end
+  
+  
+  index do
+    column :id
+    column :title do |payment|
+      div :class => "grid-row-item-title" do  
+        link_to payment.project.title, admin_project_path(payment.project)
+      end  
+    end
+    column "Client" do |payment|
+      div :class => "grid-row-item-title" do  
+        link_to payment.client.full_name, admin_admin_user_path(payment.client)
+      end  
+    end
+    column "Amount", :sortable => :amount do |payment|
+      div :class => "price" do
+        number_to_currency payment.amount
+      end
+    end
+    column :paid_on
+    
+    actions 
+  end
   
   form do |f|
     f.inputs "Payment Details" do
@@ -48,5 +74,5 @@ ActiveAdmin.register Payment do
     end
     f.actions
   end
-
+  
 end

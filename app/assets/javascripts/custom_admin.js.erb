@@ -20,4 +20,35 @@ jQuery(document).ready(function(){
     	}
     });
     
+    
+    jQuery('#sidebar #new_payment').on('submit', function(){
+    	if ( $('#payment_amount').val() == '' || $('#payment_amount').val() == 'undefined' ) {
+    		alert("Please add some amount first.");
+    		return false;	
+    	} 
+    	
+    	
+    	if ( $('#payment_paid_on_1i').val() == '' || $('#payment_paid_on_1i').val() == 'undefined' ) {
+    		alert("Please select a year for the payment date.");
+    		return false;	
+    	} 
+    	
+    	if ( $('#payment_paid_on_2i').val() == '' || $('#payment_paid_on_2i').val() == 'undefined' ) {
+    		alert("Please select a month for the payment date.");
+    		return false;	
+    	} 
+    	
+    	if ( $('#payment_paid_on_3i').val() == '' || $('#payment_paid_on_3i').val() == 'undefined' ) {
+    		alert("Please select a day for the payment date.");
+    		return false;	
+    	} 
+    	
+    	return true;	
+    });
+    
+	jQuery('#sidebar #new_payment').on('ajax:success', function(){
+		$('#project-payment-partial-contents').html('Updating...');
+    	$('#project-payment-partial-contents').load('/payments/project_payments/'+$('#payment_project_id').val());
+    });
+    
 });

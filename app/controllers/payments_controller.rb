@@ -1,6 +1,16 @@
 class PaymentsController < ApplicationController
+  
+  def index
+    
+  end
+  
+  def show
+    
+  end
+  
   def project_payments
     @Project = Project.find(params[:id])
+    render :layout => false     
   end
   
   def client_payments
@@ -16,6 +26,8 @@ class PaymentsController < ApplicationController
     end
 
     @Total_Due = @Total_Price - @Total_Paid
+    render :layout => false     
   
   end
+  
 end

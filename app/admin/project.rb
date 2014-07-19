@@ -42,6 +42,21 @@ ActiveAdmin.register Project do
   end 
   
   
+  filter :title
+  filter :price
+  filter :category_id, as: :select, :collection => Category.all
+  filter :department_id, as: :select, :collection => Department.all
+  filter :marketplace_id, as: :select, :collection => Marketplace.all
+  filter :status_id, as: :select, :collection => Status.all
+  filter :client_id, as: :select, :collection => Client.all
+  filter :sales_id, as: :select, :collection => Sales.all
+  filter :designer_id, as: :select, :collection => Designer.all
+  filter :markup_id, as: :select, :collection => Markup.all
+  filter :developer_id, as: :select, :collection => Developer.all
+  filter :awarded_on
+  filter :started_on
+  filter :ended_on
+  filter :remark
   
   #scope :client do
   #  AdminUser.where('is_client = true')
@@ -62,7 +77,35 @@ ActiveAdmin.register Project do
     end
     column "Price", :sortable => :price do |project|
       div :class => "price" do
-        number_to_currency project.price
+        @total_price = 0
+        @total_price = ( ( project.price.to_f + project.bonus.to_f ) - ( project.fine.to_f + project.marketplace_fee.to_f ) )
+        number_to_currency @total_price 
+      end
+    end
+    column "Paid" do |project|
+      div :class => "price" do
+        @total_paid = 0
+        if project.payment.any? 
+          project.payment.each do |payment|
+            @total_paid+=payment.amount.to_f
+          end
+        end
+        number_to_currency @total_paid
+      end
+    end
+    column "Due" do |project|
+      div :class => "price" do
+        @total_due = 0
+        @total_price = 0
+        @total_paid = 0
+        @total_price = ( ( project.price.to_f + project.bonus.to_f ) - ( project.fine.to_f + project.marketplace_fee.to_f ) )
+        if project.payment.any? 
+          project.payment.each do |payment|
+            @total_paid+=payment.amount.to_f
+          end
+        end
+        @total_due = @total_price - @total_paid
+        number_to_currency @total_due
       end
     end
     column :status do |project|
@@ -70,7 +113,6 @@ ActiveAdmin.register Project do
         project.status.title
       end
     end
-    column :started_on
     column :ended_on
     
     actions
@@ -81,10 +123,14 @@ ActiveAdmin.register Project do
      
   end
   
+  sidebar "New Payment!  ", only: [:show] do    
+    render partial: "add_project_payments", locals: {project: project}
+  end
+  
   sidebar "Payment Summary!  ", only: [:show] do    
     render partial: "project_payments", locals: {project: project}
   end
-  
+
   sidebar "Other Projects from this client!", :only => :show do
     table_for(Project.where("client_id = ? and id != ?", project.client_id, project).limit(5)) do
       column "Title", :title do |project|
