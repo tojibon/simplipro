@@ -123,7 +123,25 @@ ActiveAdmin.register Project do
      
   end
   
-  sidebar "New Payment!  ", only: [:show] do    
+  
+  #project_has_due_payment = Proc.new { 1==1 }
+  project_has_due_payment = Proc.new do
+    @total_price = 0
+    @total_price = ( ( project.price.to_f + project.bonus.to_f ) - ( project.fine.to_f + project.marketplace_fee.to_f ) )
+    
+    @total_paid = 0
+    if project.payment.any? 
+      project.payment.each do |payment|
+        @total_paid+=payment.amount.to_f
+      end
+    end
+    
+    @total_due = @total_price - @total_paid
+        
+    @total_due > 0
+  end 
+  
+  sidebar "New Payment!  ", only: [:show], if: project_has_due_payment do
     render partial: "add_project_payments", locals: {project: project}
   end
   

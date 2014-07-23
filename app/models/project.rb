@@ -10,4 +10,6 @@ class Project < ActiveRecord::Base
   belongs_to :developer,class_name:Developer, foreign_key:"developer_id"
   has_many :payment
   
+  
+  
 end
