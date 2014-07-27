@@ -14,6 +14,8 @@ ActiveAdmin.register Status do
   #  permitted
   # end
   
+  menu :parent => "Contents"
+  
   permit_params do
     permitted = [:title, :color, :background_color]
   end

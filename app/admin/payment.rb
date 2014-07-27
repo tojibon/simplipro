@@ -14,6 +14,8 @@ ActiveAdmin.register Payment do
   #  permitted
   # end
   
+  menu :parent => "Orders"
+  
   permit_params do
     permitted = [:project_id, :client_id, :paid_on, :amount]
   end

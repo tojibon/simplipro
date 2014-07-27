@@ -14,6 +14,8 @@ ActiveAdmin.register Category do
   #  permitted
   # end
   
+  menu :parent => "Contents"
+  
   permit_params do
     permitted = [:title]
   end

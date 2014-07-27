@@ -15,6 +15,9 @@ ActiveAdmin.register Project do
   #  permitted
   # end
   
+  
+  menu :parent => "Orders"
+  
   permit_params do
     permitted = [:client_id, :sales_id, :designer_id, :markup_id, :developer_id, :marketplace_id, :category_id, :department_id, :title, :description, :special_notes, :price, :bonus, :fine, :marketplace_fee, :awarded_on, :started_on, :ended_on, :duration, :url, :remark, :status_id]
   end  
@@ -114,13 +117,17 @@ ActiveAdmin.register Project do
       end
     end
     column :ended_on
-    
     actions
-    
     #column "Action" do |project| 
     #  link_to "Edit", edit_admin_project(project) 
     #end
-     
+    #div :class => "panel" do
+    #  h3 "Total Price: #{@all_total_price}"
+    #end
+  end
+  
+  def total_prices
+    Project.sum(:price)
   end
   
   

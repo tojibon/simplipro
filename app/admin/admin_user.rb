@@ -1,5 +1,7 @@
 ActiveAdmin.register AdminUser do
 
+  menu :parent => "Users/Clients"
+  
   permit_params :email, :password, :password_confirmation, :is_sales, :is_designer, :is_markup, :is_developer, :is_client, :full_name, :country, :company, :address, :im, :tel, :fax, :special_notes
    
   sidebar "More for ", only: [:show, :edit] do

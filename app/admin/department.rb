@@ -14,6 +14,8 @@ ActiveAdmin.register Department do
   #  permitted
   # end
   
+  menu :parent => "Contents"
+  
   permit_params do
     permitted = [:title, :description]
   end

@@ -14,6 +14,8 @@ ActiveAdmin.register Marketplace do
   #  permitted
   # end
   
+  menu :parent => "Contents"
+  
   permit_params do
     permitted = [:title]
   end

@@ -4,7 +4,7 @@
     <%= f.input :project_id, :as => 'hidden', :value => project.id %>
 	<%= f.input :client_id, :as => 'hidden', :value => project.client_id %>
 	<%= f.input :amount %>
-	<%= f.input :paid_on %>
+	<%= f.input :paid_on, :as => 'date' %>
 	</ul>
     <%= f.submit :value => 'Save Payment' %>
   	
