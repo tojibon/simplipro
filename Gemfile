@@ -5,7 +5,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 # Use postgresql as the database for Active Record
-gem 'pg'
+#gem 'pg'
+group :production do
+  gem 'pg',              '0.17.1'
+  gem 'rails_12factor','0.0.2'
+end
 
 gem 'devise'
 
